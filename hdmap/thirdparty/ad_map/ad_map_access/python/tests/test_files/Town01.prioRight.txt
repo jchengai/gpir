@@ -1,0 +1,7 @@
+[ADMap]
+map=Town01.xodr
+openDriveOverlapMargin=0.2
+openDriveDefaultIntersectionType=PriorityToRight
+
+[POI]
+poi=T1 48.9970472 8.0026912 0.1

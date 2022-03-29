@@ -1,0 +1,8 @@
+[ADMap]
+map=Town01.adm
+
+[ENUReference]
+default=49.0 8.0 0.0
+
+[POI]
+poi=T1 48.9970472 8.0026912 0.1

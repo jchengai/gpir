@@ -1,0 +1,117 @@
+#!/usr/bin/python
+# ----------------- BEGIN LICENSE BLOCK ---------------------------------
+#
+# Copyright (c) 2020 Intel Corporation
+#
+# SPDX-License-Identifier: MIT
+#
+# ----------------- END LICENSE BLOCK -----------------------------------
+
+"""
+This module uses pygccxml and py++ to generate
+Python interfaces for all classes and datatypes
+of the ad_map_access library.
+
+The resulting library is called libad_map_access_python
+"""
+
+from python_wrapper_helper import generate_python_wrapper, post_process_python_wrapper
+
+
+def main():
+    """
+    Main function to generate Python-C++ binding code
+    """
+    include_dirs = {
+        "@GENPY_INCLUDE_DIRS@",
+        "@CMAKE_CURRENT_LIST_DIR@/../generated/include",
+        "@CMAKE_CURRENT_LIST_DIR@/../impl/include"
+    }
+
+    declarations={"toString", "fromString", "std::to_string", "std::sqrt", "std::fabs", "std::numeric_limits"}
+
+    additional_replacements = {
+        # types used as default without full namespace in code
+        ("physics::Distance(", "ad::physics::Distance("),
+        ("physics::ParametricValue(", "ad::physics::ParametricValue("),
+        ("std::vector<route::FullRoute>(", "std::vector<ad::map::route::FullRoute>("),
+        ("nullptr", "0"),
+        # some renaming for set data types
+        ("\"vector_less__ad_scope_map_scope_route_scope_FullRoute__greater_\"", "\"FullRouteList\""),
+        ("\"vector_less__ad_scope_map_scope_lane_scope_ENUBorder__greater_\"", "\"ENUBorderList\""),
+        ("\"vector_less__ad_scope_map_scope_lane_scope_ECEFBorder__greater_\"", "\"ECEFBorderList\""),
+        ("\"vector_less__ad_scope_map_scope_lane_scope_GeoBorder__greater_\"", "\"GeoBorderList\""),
+        ("\"vector_less__ad_scope_map_scope_lane_scope_LaneId__greater_\"", "\"LaneIdList\""),
+        ("\"set_less__ad_scope_map_scope_lane_scope_LaneId__greater_\"", "\"LaneIdSet\""),
+        ("\"set_less__ad_scope_map_scope_landmark_scope_LandmarkId__greater_\"", "\"LandmarkIdSet\""),
+        ("\"vector_less__ad_scope_map_scope_route_scope_ConnectingInterval__greater_\"", "\"ConnectingSegment\""),
+        ("\"vector_less__ad_scope_map_scope_match_scope_MapMatchedPosition__greater_\"",
+         "\"MapMatchedPositionConfidenceList\"")
+    }
+
+    # leave out opendrive and serialize completely
+    for component in ["access", "config", "intersection", "landmark", "lane", "match", "point", "restriction", "route"]:
+        main_namespace="ad::map::{}".format(component)
+
+        declarations_component=declarations.copy()
+        declarations_component.add(main_namespace)
+
+        header_dirs = {
+            "@CMAKE_CURRENT_LIST_DIR@/../generated/include/ad/map/{}".format(component),
+            "@CMAKE_CURRENT_LIST_DIR@/../impl/include/ad/map/{}".format(component)
+        }
+
+        ignore_files={}
+        ignore_declarations={}
+        additional_includes={}
+        if component == "access":
+            ignore_files={
+                # issue: compile errors, serializer, Factory should not be required directly
+                "access/Factory.hpp",
+                # issue: store makes problems on compilation, because returning reference not possible
+                "access/Store.hpp"
+            }
+            ignore_declarations={"Store", "getStore"}
+            # cope with forward declarations
+            additional_includes={"ad/map/point/CoordinateTransform.hpp"}
+        elif component == "route":
+            ignore_files={
+                # issue: virtual calculate() function
+                "route/Route.hpp",
+                "route/RouteAStar.hpp",
+                "route/RouteExpander.hpp",
+                "route/RoutePrediction.hpp"
+                }
+            # cope with forward declarations
+            additional_includes={"ad/map/intersection/Intersection.hpp"}
+
+        generate_python_wrapper(library_name=component,
+                                cpp_filename="AdMap-{}-PythonWrapper.cpp.in".format(component),
+                                header_directories=header_dirs,
+                                include_paths=include_dirs,
+                                main_namespace=main_namespace,
+                                declarations=declarations_component,
+                                ignore_declarations=ignore_declarations,
+                                ignore_files=ignore_files)
+
+        additional_replacements_component = additional_replacements.copy()
+        additional_replacements_component.add(
+                ("BOOST_PYTHON_MODULE({}){{".format(component),
+                 "void export_ad_map_{}(){{\n\n".format(component) +
+                 "  bp::object ad_map_{}_module(bp::handle<>(bp::borrowed(PyImport_AddModule(\"{}\"))));\n".format(component, component) +
+                 "  bp::scope().attr(\"{}\") = ad_map_{}_module;\n".format(component, component) +
+                 "  bp::scope submodule_scope = ad_map_{}_module;\n\n".format(component) +
+                 "  bp::scope().attr(\"__doc__\") = \"Python binding of ad_map_access ad::map::{} namespace C++ code for @binding_string@\";".format(component) +
+                 "  bp::scope().attr(\"__copyright__\") = \"Copyright (C) 2020 Intel Corporation\";" +
+                 "  bp::scope().attr(\"__license__\") = \"MIT\";"
+                ))
+        post_process_python_wrapper(header_directories=header_dirs,
+                                    cpp_filename_in="AdMap-{}-PythonWrapper.cpp.in".format(component),
+                                    cpp_filename_out="AdMap-{}-PythonWrapper.cpp".format(component),
+                                    additional_replacements=additional_replacements_component,
+                                    additional_includes=additional_includes
+        )
+
+
+if __name__ == '__main__':
+    main()

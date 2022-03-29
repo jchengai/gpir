@@ -1,0 +1,14 @@
+// ----------------- BEGIN LICENSE BLOCK ---------------------------------
+//
+// Copyright (C) 2017-2019 Intel Corporation
+//
+// SPDX-License-Identifier: MIT
+//
+// ----------------- END LICENSE BLOCK -----------------------------------
+
+#pragma once
+
+#define AD_MAP_ACCESS_VERSION_MAJOR @ad_map_access_VERSION_MAJOR@
+#define AD_MAP_ACCESS_VERSION_MINOR @ad_map_access_VERSION_MINOR@
+#define AD_MAP_ACCESS_VERSION_REV @ad_map_access_VERSION_PATCH@
+#define AD_MAP_ACCESS_VERSION_STRING "@ad_map_access_VERSION_MAJOR@.@ad_map_access_VERSION_MINOR@.@ad_map_access_VERSION_PATCH@"

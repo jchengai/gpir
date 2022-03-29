@@ -1,0 +1,5 @@
+[ADMap]
+map=../main.cpp
+
+[POI]
+poi=MapMatching-NoResult 50.0189305 8.4399515 0.

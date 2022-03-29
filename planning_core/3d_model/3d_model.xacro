@@ -1,0 +1,11 @@
+<?xml version="1.0"?>
+<robot name="vehicle" xmlns:xacro="http://ros.org/wiki/xacro">
+  <link name="ego_vehicle2d">
+    <visual>
+      <origin xyz="0 0 1.0" rpy="0 0 1.5707963267948966"/>
+      <geometry>
+        <mesh filename="package://planning_core/3d_model/model3/model3.dae" scale="1.0 1.0 1.0"/>
+      </geometry>
+    </visual>
+  </link>
+</robot>

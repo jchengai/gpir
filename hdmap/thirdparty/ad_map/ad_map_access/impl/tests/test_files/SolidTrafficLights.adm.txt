@@ -1,0 +1,8 @@
+[ADMap]
+map=SolidTrafficLights.adm
+
+[ENUReference]
+default=49.015 8.435 0
+
+[POI]
+poi=T2 49.01870 8.43731 0

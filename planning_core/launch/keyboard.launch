@@ -1,0 +1,8 @@
+
+<launch>
+
+  <node pkg="planning_core" name="keyboard" type="keyboard.py" output="screen" 
+  args="--img=$(find planning_core)/../misc/keyboard.png">
+  </node>
+
+</launch>

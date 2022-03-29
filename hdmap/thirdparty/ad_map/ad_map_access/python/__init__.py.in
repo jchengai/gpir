@@ -1,0 +1,17 @@
+# ----------------- BEGIN LICENSE BLOCK ---------------------------------
+#
+# Copyright (c) 2020 Intel Corporation
+#
+# SPDX-License-Identifier: MIT
+#
+# ----------------- END LICENSE BLOCK -----------------------------------
+
+"""
+Import ad_map_access module for @binding_string@
+"""
+
+import sys
+import os.path
+sys.path.append(os.path.dirname(__file__))
+
+from ad_map_access_@binding_string@_module import *

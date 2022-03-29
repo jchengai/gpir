@@ -1,0 +1,11 @@
+<launch>
+
+<node name="example" pkg="hdmap" type="example" output="screen"
+      args="$(find hdmap)/maps/Town03.txt  
+            $(find hdmap)/maps/pcd/Town03.pcd">
+</node>
+
+<arg name="rvizconfig" default="$(find hdmap)/rviz/hdmap.rviz"/>
+<node name="hdmap_rviz" pkg="rviz" type="rviz" args="-d $(arg rvizconfig)" required="false" />
+
+</launch>

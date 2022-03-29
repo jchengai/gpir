@@ -1,0 +1,8 @@
+[ADMap]
+map=TPK.bad0.adm
+
+[ENUReference]
+default=49.0192671 8.4421163 0
+
+[POI]
+poi=

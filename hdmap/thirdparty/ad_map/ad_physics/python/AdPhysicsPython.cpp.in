@@ -1,0 +1,14 @@
+// ----------------- BEGIN LICENSE BLOCK ---------------------------------
+//
+// Copyright (C) 2020 Intel Corporation
+//
+// SPDX-License-Identifier: MIT
+//
+// ----------------- END LICENSE BLOCK -----------------------------------
+
+extern void export_ad_physics();
+
+void export_ad_physics_python()
+{
+  export_ad_physics();
+}

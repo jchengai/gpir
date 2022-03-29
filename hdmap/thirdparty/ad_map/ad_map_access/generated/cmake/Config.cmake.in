@@ -1,0 +1,38 @@
+##
+# ----------------- BEGIN LICENSE BLOCK ---------------------------------
+#
+# Copyright (C) 2018-2020 Intel Corporation
+#
+# SPDX-License-Identifier: MIT
+#
+# ----------------- END LICENSE BLOCK -----------------------------------
+##
+##
+# Generated file
+#
+# Generator Version : 11.0.0-1997
+##
+
+@PACKAGE_INIT@
+
+include(CMakeFindDependencyMacro)
+
+find_package(Boost REQUIRED COMPONENTS program_options filesystem)
+get_target_property(BOOST_PROGRAM_OPTIONS_INTERFACE_INCLUDE_DIRS Boost::program_options INTERFACE_INCLUDE_DIRECTORIES)
+list(APPEND INCLUDE_DIRS ${BOOST_PROGRAM_OPTIONS_INTERFACE_INCLUDE_DIRS})
+list(APPEND LIBRARIES Boost::program_options)
+get_target_property(BOOST_FILESYSTEM_INTERFACE_INCLUDE_DIRS Boost::filesystem INTERFACE_INCLUDE_DIRECTORIES)
+list(APPEND INCLUDE_DIRS ${BOOST_FILESYSTEM_INTERFACE_INCLUDE_DIRS})
+list(APPEND LIBRARIES Boost::filesystem)
+
+find_package(ad_map_opendrive_reader REQUIRED CONFIG)
+get_target_property(AD_MAP_OPENDRIVE_READER_INTERFACE_INCLUDE_DIRS ad_map_opendrive_reader INTERFACE_INCLUDE_DIRECTORIES)
+list(APPEND INCLUDE_DIRS ${AD_MAP_OPENDRIVE_READER_INTERFACE_INCLUDE_DIRS})
+list(APPEND LIBRARIES ad_map_opendrive_reader)
+
+find_dependency(ad_physics 2.4.0)
+find_dependency(spdlog)
+
+include("${CMAKE_CURRENT_LIST_DIR}/@PROJECT_NAME@Targets.cmake")
+
+check_required_components(@PROJECT_NAME@)

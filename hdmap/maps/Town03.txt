@@ -1,0 +1,8 @@
+[ADMap]
+map=opendrive/Town03.xodr
+openDriveOverlapMargin=0.2
+openDriveDefaultIntersectionType=TrafficLight
+openDriveDefaultTrafficLightType=LEFT_STRAIGHT_RED_YELLOW_GREEN
+
+[POI]
+poi=T1 48.997026667 8.0026912 0.1

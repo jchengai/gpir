@@ -1,0 +1,7 @@
+[ADMap]
+map=PFZ_Traffic_Lights.adm
+
+[ENUReference]
+default=49.02 8.457 0
+
+[POI]

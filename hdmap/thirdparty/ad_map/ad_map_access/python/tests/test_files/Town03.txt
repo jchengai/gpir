@@ -1,0 +1,7 @@
+[ADMap]
+map=Town03.xodr
+openDriveOverlapMargin=0.2
+
+[POI]
+poi=T1 0.00178726 0.00204158 0.0
+poi=T2 -0.0006539 0.0006703 0.0

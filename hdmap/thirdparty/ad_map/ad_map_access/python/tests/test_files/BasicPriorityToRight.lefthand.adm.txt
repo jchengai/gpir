@@ -1,0 +1,7 @@
+[ADMap]
+map=BasicPriorityToRight.lefthand.adm
+
+[ENUReference]
+default=49.015 8.435 0
+
+[POI]

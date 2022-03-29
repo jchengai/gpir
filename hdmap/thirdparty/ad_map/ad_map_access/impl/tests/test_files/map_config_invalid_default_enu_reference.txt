@@ -1,0 +1,5 @@
+[ADMap]
+map=TPK.adm
+
+[ENUReference]
+default=49.01993918264 bla 0.1

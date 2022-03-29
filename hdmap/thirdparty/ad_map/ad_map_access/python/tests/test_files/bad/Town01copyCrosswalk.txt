@@ -1,0 +1,7 @@
+[ADMap]
+map=Town01copy.xodr
+openDriveOverlapMargin=0.2
+openDriveDefaultIntersectionType=Crosswalk
+
+[POI]
+poi=T1 48.9970472 8.4026912 0.1
