@@ -5,6 +5,8 @@ GPIR is developed aiming to provide an unified real-time trajectory planning fra
 
 ## About
 
+*Paper*: [ArXiv](https://arxiv.org/abs/2205.11853)
+
 *Demo video*: [YouTube](https://youtu.be/PFfj7PzZ3PU)
 
 *Author*: Jie Cheng, Yingbing Chen, Qingwen Zhang, Lu Gan and Ming Liu, [RAM-LAB](https://ram-lab.com/)
