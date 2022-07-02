@@ -5,8 +5,6 @@ GPIR is developed aiming to provide an unified real-time trajectory planning fra
 
 ## About
 
-*Paper*: [ArXiv](https://arxiv.org/abs/2205.11853)
-
 *Demo video*: [YouTube](https://youtu.be/PFfj7PzZ3PU)
 
 *Author*: Jie Cheng, Yingbing Chen, Qingwen Zhang, Lu Gan and Ming Liu, [RAM-LAB](https://ram-lab.com/)
@@ -119,6 +117,10 @@ We would like to express sincere thanks to the authors of the following tools an
 - Opendrive map parser: [ad_map](https://github.com/carla-simulator/map)
 - QP solver: [osqp](https://github.com/osqp/osqp)
 - iSAM solver: [GTSAM](https://github.com/borglab/gtsam)
+- Visualization: [EPSILON](https://github.com/HKUST-Aerial-Robotics/EPSILON) 
+- Spline smoothing & some math utils: [Apollo](https://github.com/ApolloAuto/apollo)
+
+Please let me know if your work is not properly cited or acknowledged, and thanks again for these authors who kindly open-sourcing their work to the community.
 
 ## License
 
